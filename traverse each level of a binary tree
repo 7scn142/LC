@@ -1,5 +1,6 @@
+for BFS:
 need a recursion function to get the height of each level, put the node value of each level into a list;
-
+https://leetcode.com/problems/binary-tree-level-order-traversal/discuss/114449/a-general-approach-to-level-order-traversal-questions-in-java
 sample: 
 class Solution(object):
     def levelOrder(self, root):
