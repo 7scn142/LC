@@ -1,3 +1,10 @@
+applied problems:
+1. need to keep track of each level of the tree
+2. recursion is better than while loop in handling empty input case
+3. in python, stack is list[]; queue is collections.deque.
+
+
+
 for BFS:
 need a recursion function to get the height of each level, put the node value of each level into a list;
 https://leetcode.com/problems/binary-tree-level-order-traversal/discuss/114449/a-general-approach-to-level-order-traversal-questions-in-java
@@ -26,3 +33,28 @@ class Solution(object):
         self.everyLevel(rows, root.right, level + 1)
         
         return rows
+
+while loop solution:
+
+import Queue as queue
+class Solution(object):
+    def averageOfLevels(self, root):
+        if not root:
+            return []
+        
+        rows = []
+        nodes = queue.Queue()
+        nodes.put(root)
+        while not nodes.empty():
+            levelsize = nodes.qsize() #queue size is the quantity of nodes in the same level
+            row = []
+            for i in range(levelsize): #get all the nodes in the same level and push the sub-nodes in the queue
+                node = nodes.get()
+                row.append(node.val)
+                if node.left:
+                    nodes.put(node.left)
+                if node.right:
+                    nodes.put(node.right)
+            rows.append(row)        
+        
+        return [sum(i)*1.0/len(i) for i in rows]
