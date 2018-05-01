@@ -1,0 +1,28 @@
+need a recursion function to get the height of each level, put the node value of each level into a list;
+
+sample: 
+class Solution(object):
+    def levelOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        rows = []
+        level = 0
+        rows = self.everyLevel(rows, root, level)
+        
+        
+        return rows
+        
+        
+    def everyLevel(self, rows, root, level):
+        if not root:
+            return rows
+        if  len(rows) <= level:
+            rows.append([])
+        rows[level].append(root.val)
+        
+        self.everyLevel(rows, root.left, level + 1)
+        self.everyLevel(rows, root.right, level + 1)
+        
+        return rows
