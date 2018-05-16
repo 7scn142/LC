@@ -1,0 +1,35 @@
+1. check the value when recursion begins;
+2. keep track of the return value;
+3. 
+
+
+
+class Solution(object):
+    def maxAreaOfIsland(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+
+        if not grid:
+            return 0
+        
+        ret = 0
+        for i in range(len(grid)):
+            for j in range(len(grid[i])):
+                if grid[i][j] == 1:
+                    current = self.islandDFS(grid, i, j, 0)
+                    if current > ret:
+                        ret = current
+        
+        return ret
+    
+    def islandDFS(self, grid, r, c, size):
+        if r >= 0 and r < len(grid) and c >= 0 and c < len(grid[0]):
+            if grid[r][c] == 1:
+                grid[r][c] = 0
+                size += 1
+                size = self.islandDFS(grid, r - 1, c, size)
+                size = self.islandDFS(grid, r + 1, c, size)
+                size = self.islandDFS(grid, r, c - 1, size)
+                size = self.islandDFS(grid, r, c + 1, size)
+        return size
